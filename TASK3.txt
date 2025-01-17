@@ -1,0 +1,27 @@
+#include <LiquidCrystal.h>
+
+// initialize the library with the numbers of the interface pins
+LiquidCrystal lcd(12, 11, 5, 4, 3, 2);
+
+const int tempSensorPin = A0;
+
+void setup() 
+{
+  // set up the LCD's number of columns and rows:
+  lcd.begin(16, 2);
+  // Print a message to the LCD.
+  lcd.print("Temperature:");
+}
+
+void loop() 
+{
+  // Read the temperature sensor
+  int sensorValue = analogRead(tempSensorPin);
+  float voltage = sensorValue * (5.0 / 1023.0);
+  float temperatureC = (voltage - 0.5) * 100;  
+  
+  lcd.setCursor(0, 1);
+  lcd.print(temperatureC);
+  lcd.print(" C");
+  delay(1000);
+}
